@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SwUI - Swift User Interface
-// Copyright (C) 2016 Nicholas Swift (nicholas@nicholas-swift.com)
+// Copyright (C) 2016 Nicholas Swift (nicholas-swift.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -25,76 +25,74 @@
 #ifndef UIBUTTON_H
 #define UIBUTTON_H
 
-////////////////////////////////////////////////////////////
 // Headers
-////////////////////////////////////////////////////////////
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Export.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace swui
 {
-////////////////////////////////////////////////////////////
-/// \brief Specialized object representing a button
-///
-////////////////////////////////////////////////////////////
+// Specialized object representing a button
 class SFML_GRAPHICS_API Button : public sf::Drawable
 {
 public:
 
-    /// \brief Default constructor
-    /// \param size Size of the button
-	/// \param pos Position of the button
-	explicit Button(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& pos = sf::Vector2f(0, 0), void (*func)(void) = nullptr);
+    // Default constructor
+    // size -> Size of the button
+	// pos -> Position of the button
+	explicit Button(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& pos = sf::Vector2f(0, 0), void (*func)(void) = NULL);
 
-	/// \brief Update button with mouse over and click
-	void update(sf::RenderWindow& window);
+	// Update button with mouse over and click
+	void update(const sf::RenderWindow& window);
 
-    /// \brief Draw the button
-    /// \param target Target to draw to
+    // Draw the button
+    // target -> Target to draw to
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:
 
-	// Set size of button
+	// Set and get size of button
 	void setSize(const sf::Vector2f& size);
 	const sf::Vector2f& getSize() const;
 
-	// Set color of button
-	void setFillColor(const sf::Color& color);
-	const sf::Color& getColor() const;
+	// Set and get position of button
+	void setPosition(const sf::Vector2f& pos);
+	void setPosition(const float& x, const float& y);
+	const sf::Vector2f& getPosition() const;
 
-	// Set default texture of button
+	// Set and get color of button
+	void setFillColor(const sf::Color& color);
+	const sf::Color& getFillColor() const;
+
+	// Set and get default texture of button
 	void setDefaultTexture(const sf::Texture& texture);
 	const sf::Texture& getDefaultTexture() const;
 
-	// Set hover texture of button
+	// Set and get hover texture of button
 	void setHoverTexture(const sf::Texture& texture);
 	const sf::Texture& getHoverTexture() const;
 
-	// Set held texture of button
+	// Set and get held texture of button
 	void setHeldTexture(const sf::Texture& texture);
 	const sf::Texture& getHeldTexture() const;
 
-	// Get state of button
-	const std::size_t getState() const;
+	// Set and get if button is clicked
+	void setIsClicked(const bool& b);
+	const bool& getIsClicked() const;
 
-	// Set on click function
-	void setOnClick(void (*func)(void));
+	// Set on click function TEMP TEMP TEMP TEMPT EMPTE MTPEMTPEPTEMPTMEJTOEJTOETMEPTJWIEOJRORJ
+	void setOnClick(void (*myFunc)());
 
 private:
+	// Rectangle for button
+	sf::RectangleShape m_rect;
 
-    ////////////////////////////////////////////////////////////
-    // Member data
-    ////////////////////////////////////////////////////////////
-	sf::RectangleShape m_rect; ///< Rect for button
+	// Sprite for button
+	sf::Sprite m_sprite;
 
-	sf::Sprite m_sprite; ///< Sprite for button
+	// Bools for button hovering, holding, and clicking
+	bool m_isHovered, m_isHeld, m_isClicked;
 
-	bool m_isHovered, m_isHeld, m_isClicked;///< Bools for button
-
-	void (*m_myFunc)(void);
+	// Button onClick function
+	void (*m_func)();
 };
 
 } //namespace sf

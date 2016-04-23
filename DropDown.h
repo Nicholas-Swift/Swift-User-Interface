@@ -17,6 +17,7 @@ public:
 
 private:
 	void mouseUpdate(sf::RenderWindow& window);
+	void buttonClicked(std::size_t i);
 
 private:
 	std::vector<Button> m_buttons;

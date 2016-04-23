@@ -10,7 +10,7 @@
 
 void Argh()
 {
-	std::cout<<"This is something amazing!"<<std::endl;
+	std::cout<<"fjoewif"<<std::endl;
 }
 
 int main()
@@ -18,8 +18,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Swift User Interface");
     
 	// Button
-	/*swui::Button button(sf::Vector2f(200, 100), sf::Vector2f(20, 20));
-	button.setOnClick(Argh);*/
+	//swui::Button button(sf::Vector2f(200, 100), sf::Vector2f(20, 20));
+	//button.setOnClick(Argh);
 
 	// Drop Down
 	swui::DropDown dropdown(sf::Vector2f(200, 50), sf::Vector2f(20, 20), 5);
