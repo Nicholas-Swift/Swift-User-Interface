@@ -11,7 +11,7 @@ swui::DropDown::DropDown(const sf::Vector2f& size, const sf::Vector2f& pos, cons
 		m_buttons.push_back(button);
 	}
 
-	m_showAll = true;
+	m_showAll = false;
 	
 	m_currentlySelected = 0;
 }

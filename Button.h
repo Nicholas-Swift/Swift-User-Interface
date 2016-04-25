@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef UIBUTTON_H
-#define UIBUTTON_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 // Headers
 #include <SFML/Graphics.hpp>
@@ -31,7 +31,7 @@
 namespace swui
 {
 // Specialized object representing a button
-class SFML_GRAPHICS_API Button : public sf::Drawable
+class Button : public sf::Drawable, public sf::Transformable
 {
 public:
 
