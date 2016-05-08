@@ -22,7 +22,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-
 // Headers
 #include "stdafx.h"
 #include "Button.h"
@@ -30,7 +29,7 @@
 // Default constructor
 // size -> Size of the button
 // pos -> Position of the button
-swui::Button::Button(const sf::Vector2f& size, const sf::Vector2f& pos, void (*func)(void))
+swui::Button::Button(const sf::Vector2f& size, const sf::Vector2f& pos)
 {
 	// Set the size and position of the RectangleShape
 	m_rect.setSize(size);
@@ -41,44 +40,13 @@ swui::Button::Button(const sf::Vector2f& size, const sf::Vector2f& pos, void (*f
 	m_sprite.setPosition(pos);
 
 	// Make sure nothing is hovered when initalized
-	m_isHovered = m_isHeld = m_isClicked = false;
-
-	//FMEWTEMPTEMPTEPMTPEWFOIEJWOFIJ EJTEMP TJEOWIFJOEW TEMP
-	m_func = func;
+	m_hovered = m_held = m_clicked = false;
 }
 
 // Update button with mouse over and click
 void swui::Button::update(const sf::RenderWindow &window)
 {
-	// Hovering, Clicking, and Releasing
-	if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		m_rect.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)
-			? m_isHovered = true : m_isHovered = false;
-
-		if(m_isHeld && m_isHovered)
-		{
-			//TEMPJFIOEWIJOTEMPTMEOMFIWOJOETMPEOFWIEJOTEMP
-			if(m_func)
-				m_func();
-
-			m_isClicked = true;
-		}
-		m_isHeld = false;
-	}
-	else
-	{
-		if(m_isHovered)
-			m_isHeld = true;
-	}
-
-	// Change color of m_rect
-	if(m_isHeld)
-		m_rect.setFillColor(sf::Color::Blue);
-	else if(m_isHovered)
-		m_rect.setFillColor(sf::Color::Green);
-	else
-		m_rect.setFillColor(sf::Color::Red);
+	mouseUpdate(window);
 }
 
 // Draw the button
@@ -91,55 +59,122 @@ void swui::Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(m_sprite, states);
 }
 
+////////////////////////////////////////////////////////////
+
+// Update the button with mouse over and click -- used by update
+void swui::Button::mouseUpdate(const sf::RenderWindow& window)
+{
+		// Hovering, Clicking, and Releasing
+	if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		m_rect.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)
+			? m_hovered = true : m_hovered = false;
+
+		if(m_held && m_hovered)
+			m_clicked = true;
+		m_held = false;
+	}
+	else
+	{
+		if(m_hovered)
+			m_held = true;
+	}
+
+	// Change color of m_rect
+	if(m_held)
+		m_rect.setFillColor(sf::Color::Blue);
+	else if(m_hovered)
+		m_rect.setFillColor(sf::Color::Green);
+	else
+		m_rect.setFillColor(sf::Color::Red);
+}
+
+////////////////////////////////////////////////////////////
+
+// Set size of button
 void swui::Button::setSize(const sf::Vector2f& size)
 {
 	m_rect.setSize(size);
 	m_sprite.setTextureRect(sf::IntRect(m_rect.getGlobalBounds()));
 }
 
+// Set size of button
+void swui::Button::setSize(const float& x, const float& y)
+{
+	m_rect.setSize(sf::Vector2f(x, y));
+	m_sprite.setTextureRect(sf::IntRect(m_rect.getGlobalBounds()));
+}
+
+// Get size of button
 const sf::Vector2f& swui::Button::getSize() const
 {
 	return(m_rect.getSize());
 }
 
+// Set position of button
 void swui::Button::setPosition(const sf::Vector2f& pos)
 {
 	m_rect.setPosition(pos);
 	m_sprite.setPosition(pos);
 }
 
+// Set position of button
 void swui::Button::setPosition(const float& x, const float& y)
 {
 	m_rect.setPosition(x, y);
 	m_sprite.setPosition(x, y);
 }
 
+// Get position of button
 const sf::Vector2f& swui::Button::getPosition() const
 {
 	return(m_rect.getPosition());
 }
 
+// Set fill color of button
 void swui::Button::setFillColor(const sf::Color& color)
 {
 	m_rect.setFillColor(color);
 }
 
+// Get fill color of button
 const sf::Color& swui::Button::getFillColor() const
 {
 	return(m_rect.getFillColor());
 }
 
-void swui::Button::setIsClicked(const bool& b)
+// Set if button is hovered
+void swui::Button::setHovered(const bool& b)
 {
-	m_isClicked = b;
+	m_hovered = b;
 }
 
-const bool& swui::Button::getIsClicked() const
+// Get if button is hovered
+const bool& swui::Button::getHovered() const
 {
-	return m_isClicked;
+	return m_hovered;
 }
 
-void swui::Button::setOnClick(void (*func)())
+// Set if button is held
+void swui::Button::setHeld(const bool& b)
 {
-	m_func = func;
+	m_held = b;
+}
+
+// Get if button is held
+const bool& swui::Button::getHeld() const
+{
+	return m_held;
+}
+
+// Set if button is clicked
+void swui::Button::setClicked(const bool& b)
+{
+	m_clicked = b;
+}
+
+// Get if button is clicked
+const bool& swui::Button::getClicked() const
+{
+	return m_clicked;
 }

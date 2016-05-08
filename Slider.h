@@ -22,56 +22,43 @@
 //
 ////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
-#include "CheckBox.h"
+#ifndef SLIDER_H
+#define SLIDER_H
 
-// Default constructor
-// size -> Size of the button
-// pos -> Position of the button
-// checked -> Whether the button is initially checked or not
-swui::CheckBox::CheckBox(const sf::Vector2f& size, const sf::Vector2f& pos, const bool& checked)
+// Headers
+#include "Button.h"
+
+namespace swui
 {
-	m_button.setSize(size);
-	m_button.setPosition(pos);
-
-	m_checked = checked;
-}
-
-// Update check box
-void swui::CheckBox::update(sf::RenderWindow& window)
+// Specialized object representing a slider
+class Slider : public sf::Drawable
 {
-	m_button.update(window);
-	if(m_button.getClicked())
-	{
-		m_button.setClicked(false);
-		m_checked = !m_checked;
-	}
+public:
 
-	if(m_checked)
-	{
-		auto tempColor = m_button.getFillColor();
-		tempColor.a = 150;
-		m_button.setFillColor(tempColor);
-	}
-}
+	// Default constructor
+    // size -> Size of the button
+	// pos -> Position of the button
+	explicit Slider(sf::Vector2f size = sf::Vector2f(500, 50), sf::Vector2f pos = sf::Vector2f(0, 0));
 
-// Draw check box
-// target -> Target to draw to
-void swui::CheckBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	target.draw(m_button, states);
-}
+	// Update slider
+	void update(const sf::RenderWindow& window);
 
-////////////////////////////////////////////////////////////
+	// Draw slider
+	// target -> Target to draw to
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-// Set and get whether the check box is checked
-void swui::CheckBox::setChecked(bool& b)
-{
-	m_checked = b;
-}
+private:
 
-const bool& swui::CheckBox::getChecked() const
-{
-	return(m_checked);
-}
+	// Button
+	swui::Button m_button;
 
+	// Bar
+	sf::RectangleShape m_bar;
+
+	// Float
+	float m_percent;
+};
+
+} //namespace swui
+
+#endif
