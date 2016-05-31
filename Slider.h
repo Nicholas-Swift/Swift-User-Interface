@@ -38,7 +38,7 @@ public:
 	// Default constructor
     // size -> Size of the button
 	// pos -> Position of the button
-	explicit Slider(sf::Vector2f size = sf::Vector2f(500, 50), sf::Vector2f pos = sf::Vector2f(0, 0));
+	explicit Slider(sf::Vector2f barSize = sf::Vector2f(500, 10), sf::Vector2f buttonSize = sf::Vector2f(50, 50), sf::Vector2f pos = sf::Vector2f(0, 0));
 
 	// Update slider
 	void update(const sf::RenderWindow& window);
@@ -46,6 +46,26 @@ public:
 	// Draw slider
 	// target -> Target to draw to
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+public:
+	// Set and get position
+	void setPosition(const float& x, const float& y);
+	void setPosition(const sf::Vector2f& pos);
+	const sf::Vector2f& getPosition() const;
+
+	// Set and get bar size
+	void setBarSize(const float& x, const float& y);
+	void setBarSize(const sf::Vector2f& size);
+	const sf::Vector2f& getBarSize() const;
+
+	// Set and get button size
+	void setButtonSize(const float& x, const float& y);
+	void setButtonSize(const sf::Vector2f& size);
+	const sf::Vector2f& getButtonSize() const;
+
+	// Set and get float percentage
+	void setPercent(const float& f);
+	const float& getPercent() const;
 
 private:
 

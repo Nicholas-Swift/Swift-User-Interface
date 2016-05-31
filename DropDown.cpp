@@ -30,7 +30,7 @@
 // size -> Size of the button
 // pos -> Position of the button
 // listNumber -> Initial number of elements in the drop down men
-swui::DropDown::DropDown(const sf::Vector2f& size, const sf::Vector2f& pos, const float& listNumber)
+swui::DropDown::DropDown(const sf::Vector2f& size, const sf::Vector2f& pos, const int& listNumber)
 {
 	// Create and add the different options ------------ NOTE SWITCH THIS TO APPEND!!!!
 	for(int i = 0; i < listNumber; i++)
@@ -112,8 +112,6 @@ void swui::DropDown::buttonClicked(std::size_t i)
 			}
 		}
 	}
-
-
 }
 
 ////////////////////////////////////////////////////////////

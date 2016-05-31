@@ -39,7 +39,7 @@ public:
     // size -> Size of the button
 	// pos -> Position of the button
 	// listNumber -> Initial number of elements in the drop down menu
-	explicit DropDown(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& pos = sf::Vector2f(0, 0), const float& listNumber = 0.f);
+	explicit DropDown(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& pos = sf::Vector2f(0, 0), const int& listNumber = 0);
 
 	// Update drop down menu
 	void update(const sf::RenderWindow& window);

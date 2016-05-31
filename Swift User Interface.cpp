@@ -5,24 +5,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Button.h"
-#include "DropDown.h"
-
-void Argh()
-{
-	std::cout<<"fjoewif"<<std::endl;
-}
+#include "Menu.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Swift User Interface");
-    
-	// Button
-	//swui::Button button(sf::Vector2f(200, 100), sf::Vector2f(20, 20));
-	//button.setOnClick(Argh);
 
-	// Drop Down
-	swui::DropDown dropdown(sf::Vector2f(200, 50), sf::Vector2f(20, 20), 5);
+	swui::Menu menu;
 
     while (window.isOpen())
     {
@@ -33,15 +22,12 @@ int main()
                 window.close();
         }
 
-		// Update
-		//button.update(window);
-		dropdown.update(window);
+		menu.update(window);
 
 		// Draw
         window.clear();
 
-		//window.draw(button);
-		window.draw(dropdown);
+		window.draw(menu);
 
         window.display();
     }
