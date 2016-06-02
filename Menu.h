@@ -22,6 +22,16 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:
+	//Set and get position of menu
+	void setPosition(sf::Vector2f& position);
+	void setPosition(float& x, float& y);
+	const sf::Vector2f& getPosition() const;
+
+	//Set size of menu
+	void setSize(sf::Vector2f& size);
+	void setSize(float& x, float& y);
+	const sf::Vector2f& getSize() const;
+
 	//append and get buttons
 	void appendButton(swui::Button button);
 	void removeButton();

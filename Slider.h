@@ -31,49 +31,44 @@
 namespace swui
 {
 // Specialized object representing a slider
-class Slider : public sf::Drawable
+class Slider : public sf::RectangleShape
 {
 public:
 
 	// Default constructor
-    // size -> Size of the button
-	// pos -> Position of the button
-	explicit Slider(sf::Vector2f barSize = sf::Vector2f(500, 10), sf::Vector2f buttonSize = sf::Vector2f(50, 50), sf::Vector2f pos = sf::Vector2f(0, 0));
+    // pos -> Position of the slider
+	// barSize -> Size of the bar
+	// buttonSize -> Size of the button
+	explicit Slider(sf::Vector2f pos = sf::Vector2f(0, 0), sf::Vector2f barSize = sf::Vector2f(0, 0), sf::Vector2f buttonSize = sf::Vector2f(0, 0));
 
 	// Update slider
+	// window -> Window to get info from (size, relative mouse, etc.)
 	void update(const sf::RenderWindow& window);
 
 	// Draw slider
 	// target -> Target to draw to
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+private:
+	
+	// Update button with mouse over and click -- used by update
+	void mouseUpdate(const sf::RenderWindow& window);
+
+	// Update float percentage -- used by update
+	void percentUpdate();
+
 public:
-	// Set and get position
-	void setPosition(const float& x, const float& y);
-	void setPosition(const sf::Vector2f& pos);
-	const sf::Vector2f& getPosition() const;
-
-	// Set and get bar size
-	void setBarSize(const float& x, const float& y);
-	void setBarSize(const sf::Vector2f& size);
-	const sf::Vector2f& getBarSize() const;
-
-	// Set and get button size
-	void setButtonSize(const float& x, const float& y);
-	void setButtonSize(const sf::Vector2f& size);
-	const sf::Vector2f& getButtonSize() const;
 
 	// Set and get float percentage
 	void setPercent(const float& f);
 	const float& getPercent() const;
 
-private:
+public:
 
-	// Button
+	//Button
 	swui::Button m_button;
 
-	// Bar
-	sf::RectangleShape m_bar;
+private:
 
 	// Float
 	float m_percent;

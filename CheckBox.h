@@ -31,7 +31,7 @@
 namespace swui
 {
 // Specialized object representing a check box
-class CheckBox : public sf::Drawable
+class CheckBox : public swui::Button
 {
 public:
 
@@ -39,16 +39,16 @@ public:
     // size -> Size of the button
 	// pos -> Position of the button
 	// checked -> Whether the button is initially checked or not
-	explicit CheckBox(const sf::Vector2f& size = sf::Vector2f(32, 32), const sf::Vector2f& pos = sf::Vector2f(0, 0), const bool& checked = false);
+	explicit CheckBox(const sf::Vector2f& pos = sf::Vector2f(0, 0), const sf::Vector2f& size = sf::Vector2f(0, 0), const bool& checked = false);
 
 	// Update check box
+	// window -> Window to get info from (size, relative mouse, etc.)
 	void update(sf::RenderWindow& window);
 
-	// Draw check box
-    // target -> Target to draw to
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
 private:
+
+	// Update check box with click and color
+	void checkedUpdate();
 
 public:
 
@@ -57,9 +57,6 @@ public:
 	const bool& getChecked() const;
 
 private:
-
-	// Button
-	swui::Button m_button;
 
 	// Bool for whether check box is checked
 	bool m_checked;

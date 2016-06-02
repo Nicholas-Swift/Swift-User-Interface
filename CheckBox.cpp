@@ -29,10 +29,10 @@
 // size -> Size of the button
 // pos -> Position of the button
 // checked -> Whether the button is initially checked or not
-swui::CheckBox::CheckBox(const sf::Vector2f& size, const sf::Vector2f& pos, const bool& checked)
+swui::CheckBox::CheckBox(const sf::Vector2f& pos, const sf::Vector2f& size, const bool& checked)
 {
-	m_button.setSize(size);
-	m_button.setPosition(pos);
+	setPosition(pos);
+	setSize(size);
 
 	m_checked = checked;
 }
@@ -40,36 +40,42 @@ swui::CheckBox::CheckBox(const sf::Vector2f& size, const sf::Vector2f& pos, cons
 // Update check box
 void swui::CheckBox::update(sf::RenderWindow& window)
 {
-	m_button.update(window);
-	if(m_button.getClicked())
-	{
-		m_button.setClicked(false);
-		m_checked = !m_checked;
-	}
+	// Update Button
+	swui::Button::update(window);
 
-	if(m_checked)
-	{
-		auto tempColor = m_button.getFillColor();
-		tempColor.a = 150;
-		m_button.setFillColor(tempColor);
-	}
-}
-
-// Draw check box
-// target -> Target to draw to
-void swui::CheckBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	target.draw(m_button, states);
+	// Update the Check Box portion
+	checkedUpdate();
 }
 
 ////////////////////////////////////////////////////////////
 
-// Set and get whether the check box is checked
+void swui::CheckBox::checkedUpdate()
+{
+	// The Check Box is clicked!
+	if(getClicked())
+	{
+		setClicked(false);
+		m_checked = !m_checked;
+	}
+
+	// If it's checked, change the color
+	if(m_checked)
+	{
+		auto tempColor = getFillColor();
+		tempColor.a = 150;
+		setFillColor(tempColor);
+	}
+}
+
+////////////////////////////////////////////////////////////
+
+// Set whether the check box is checked
 void swui::CheckBox::setChecked(bool& b)
 {
 	m_checked = b;
 }
 
+// Get whether the check box is checked
 const bool& swui::CheckBox::getChecked() const
 {
 	return(m_checked);

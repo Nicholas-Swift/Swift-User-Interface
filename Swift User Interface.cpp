@@ -11,7 +11,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Swift User Interface");
 
-	swui::Menu menu;
+	swui::Slider slider(sf::Vector2f(100, 100), sf::Vector2f(100, 100), sf::Vector2f(10, 10));
 
     while (window.isOpen())
     {
@@ -22,12 +22,12 @@ int main()
                 window.close();
         }
 
-		menu.update(window);
+		slider.update(window);
 
 		// Draw
         window.clear();
 
-		window.draw(menu);
+		window.draw(slider);
 
         window.display();
     }

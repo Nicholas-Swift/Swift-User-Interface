@@ -154,7 +154,7 @@ void swui::DropDown::setButtonSize(const float& x, const float& y)
 {
 	for(auto i = m_buttons.begin(); i != m_buttons.end(); ++i)
 	{
-		i->setSize(x, y);
+		i->setSize(sf::Vector2f(x, y));
 	}
 }
 
